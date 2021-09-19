@@ -1,4 +1,4 @@
-- role: tanks
+- role: tank
   pvp_or_pve: pvp
   weapon1: sword
   weapon2: war_hammer
