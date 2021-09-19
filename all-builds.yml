@@ -1,0 +1,17 @@
+- role: tanks
+  pvp_or_pve: pvp
+  weapon1: sword
+  weapon2: war_hammer
+  physical_armor:
+  elemental_armor: 
+  build_variant: dont_dead
+  role_gist: You are a beefy mofo. Your focus is on absorbing as much damage as possible, CCing enemies around you, and reducing damage of a single enemy.
+  strengths:
+    - High amount of health
+    - CC abilities
+    - Increase damage against single enemy
+    - Heavy armor
+  weaknesses:
+    - Cannot deal much damage
+    - Not mobile
+  build_link: https://newworldfans.com/builds/full-tank-dont-dead-c6c693
