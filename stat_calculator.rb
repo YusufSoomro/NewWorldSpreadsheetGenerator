@@ -1,6 +1,7 @@
 #################### WIP ####################
 require_relative 'calculations/calculations.rb'
 require_relative 'calculations/weapon_damage.rb'
+require_relative 'calculations/hp.rb'
 
 class StatCalculator
   def intialize(data)

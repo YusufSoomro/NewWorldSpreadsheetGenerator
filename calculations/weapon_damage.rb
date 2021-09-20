@@ -61,18 +61,18 @@ private
 
     case WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].count
     when 1
-      ranges_to_points_spent = produce_ranges_to_point_counts(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first)
+      ranges_to_points_spent = produce_ranges_to_points_spent(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first)
       multiplay_points_spent_in_attributes_and_add_them_together(ranges_to_points_spent)
     when 2
-      ranges_to_points_spent1 = produce_ranges_to_point_counts(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first, :primary)
-      ranges_to_points_spent2 = produce_ranges_to_point_counts(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first, :secondary)
+      ranges_to_points_spent1 = produce_ranges_to_points_spent(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first, :primary)
+      ranges_to_points_spent2 = produce_ranges_to_points_spent(WEAPONS_TO_ATTRIBUTES[@weapon_data['type']].first, :secondary)
 
       multiplay_points_spent_in_attributes_and_add_them_together(ranges_to_points_spent1, :primary) +
         multiplay_points_spent_in_attributes_and_add_them_together(ranges_to_points_spent2, :secondary)
     end
   end
 
-  def produce_ranges_to_point_counts(attr_type, attr_significance=:only)
+  def produce_ranges_to_points_spent(attr_type, attr_significance=:only)
     points_in_attr_type = @attr_data[attr_type]
     result = {}
 
@@ -84,12 +84,11 @@ private
       if points_in_attr_type >= range.last
         result[range] = range.count 
       elsif range.cover?(points_in_attr_type)
-        modulo_num = idx == 0 ? 1 : range_arr[idx - 1].last
-        result[range] = points_in_attr_type % modulo_num
+        result[range] = idx == 0 ? points_in_attr_type : points_in_attr_type % range_arr[idx - 1].last
       end
     end
 
-    result[1..100] -= 5 if result[1..100] # Players start with 5 attribute points in each category, and they don't apply towards anything
+    result[range_arr.first] -= 5 if result[range_arr.first] # Players start with 5 attribute points in each category, and they don't apply towards anything
 
     result
   end
